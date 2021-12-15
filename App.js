@@ -6,9 +6,8 @@ import { Ionicons } from '@expo/vector-icons';
 import styles from './styles/Styles';
 
 import Home from './screens/HomeSearch';
-import History from './screens/SearchHistory';
-import Favorite from './screens/Favorites';
-import FlightInfo from './screens/Flight';
+import History from './screens/History';
+
 
 const Tab = createBottomTabNavigator();
 
@@ -24,11 +23,9 @@ export default function App() {
 
             if (route.name === 'Home') {
               iconName = 'md-home';
-            } else if (route.name === 'Favorites') {
-              iconName = 'md-heart';
-            } else if (route.name === 'Flight') {
+            } else if (route.name === 'History') {
               iconName = 'md-time';
-            }
+            } 
 
             return <Ionicons name={iconName} size={size} color={'white'} />
           },
@@ -38,9 +35,9 @@ export default function App() {
           
           
         })}>
-        <Tab.Screen name="Home" component={Home} options={{ headerStyle: { backgroundColor: 'blue' }}}/>
-        <Tab.Screen name="Flight" component={FlightInfo} />
-        <Tab.Screen name="Favorites" component={Favorite}/>
+        <Tab.Screen name="Home" component={Home} options={{ headerStyle: { backgroundColor: '#0095ff' }}}/>
+        <Tab.Screen name="History" component={History}  options={{ headerStyle: { backgroundColor: '#0095ff' }}}/>
+        
 
       </Tab.Navigator>
     </NavigationContainer>

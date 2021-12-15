@@ -3,22 +3,26 @@ import { StyleSheet } from "react-native";
 export default StyleSheet.create({
     
     background: {
-      backgroundColor: '#afd8f2',
+      flex: 1,
+      backgroundColor: '#a6d3ff',
       alignItems: 'center',
       justifyContent: 'center',
       paddingBottom: 500
     },
 
     textInput: {
-        width: 200,
+        width: 400,
+        height: 60,
         backgroundColor: 'white',
         borderColor: 'black',
         borderWidth: 1,
-        margin: 10
+        margin: 10,
+        fontSize: 20,
+        paddingLeft: 10
     },
 
     searchContainer: {
-      backgroundColor: '#afd8f2',
+      backgroundColor: '#a6d3ff',
       alignItems: 'center',
       justifyContent: 'center',
     },
@@ -30,7 +34,7 @@ export default StyleSheet.create({
     },
 
     listContainer: {
-      backgroundColor: '#afd8f2',
+      backgroundColor: '#a6d3ff',
       alignItems: 'center',
       justifyContent: 'center',
       marginLeft: "5%",
@@ -38,7 +42,10 @@ export default StyleSheet.create({
 
     listText: {
       fontSize: 20,
-      
+
+    },
+    backImage: {
+      flex: 1
     }
     
   });

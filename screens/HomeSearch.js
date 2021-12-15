@@ -1,10 +1,8 @@
-import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState } from 'react';
-import { Text, View, Button, TextInput, FlatList, Alert, ListItem } from 'react-native';
+import { Text, View, Button, TextInput, Alert } from 'react-native';
 import styles from '../styles/Styles';
-import axios from 'axios';
 
-export default function Home() {
+export default function Home(props) {
 
   const [text, setText] = useState('');
   const [aircraftData, setAircraftData] = useState([]);
@@ -18,7 +16,7 @@ export default function Home() {
   const [engine, setEngine] = useState('');
   const [isFreighter, setIsFreighter] = useState(false);
 
-  const [status, setStatus] = useState('');
+  const [history, setHistory] = useState([]);
 
 
   const getAircraftData = () => {
@@ -40,45 +38,41 @@ export default function Home() {
       setEngine(responseJson.engineType);
       setIsActive(responseJson.active);
       setIsFreighter(responseJson.isFreighter);
+      
+      setHistory([...history, responseJson.reg]);
 
     })
     .catch(error => {
       Alert.alert('Error', error.message);
     });
     console.log(aircraftData.numSeats)
+    console.log(history)
   };
  
-
-  const testArray = () => {
-    if (Array.isArray(aircraftData)) {
-      console.log('Is array')
-    } else {
-      console.log('it don work')
-    }
-  }
-
-
-
+  const { navigate } = props.navigation;
 
   return (
     <View style={{flex: 1, backgroundColor: '#afd8f2', alignItems: 'center', justifyContent: 'center'}}>
-      <View style={{flex: 1, backgroundColor: '#afd8f2', alignItems: 'center', paddingTop: 50}}>
-        <Text style={{fontSize: 50}}>Aircraft Info</Text>
-        <Text>Search specific aircraft using their registration codes: </Text>
+
+      <View style={{flex: 1, backgroundColor: '#afd8f2', alignItems: 'center', paddingTop: 30}}>
+        <Text style={{fontSize: 80, fontStyle: 'italic', fontWeight: 'bold'}}>Aircraft Info</Text>
+        <Text style={{fontSize: 18}}>Search for a specific aircraft using their registration code: </Text>
       </View>
 
-      <View style={{flex: 1, backgroundColor: '#afd8f2', alignItems: 'center'}}>
+      <View style={{flex: 1, backgroundColor: '#afd8f2', alignItems: 'center', paddingTop: 20}}>
         <TextInput
           style={styles.textInput}
-          placeholder='Registration'
+          placeholder='Registration number'
           onChangeText={text => setText(text)}
           value={text}
         />
-        <Button onPress={getAircraftData} title='Search'/>
-
+        <View>
+          <Button onPress={getAircraftData} title='Search' style={{}}/>
+          <Button onPress={() => navigate('History', {history: history})} title='Search history' color={'green'}/>
+        </View>
       </View>
 
-      <View style={{flex: 4, backgroundColor: '#afd8f2', justifyContent: 'flex-start', textAlign: 'left'}}>
+      <View style={{flex: 4, backgroundColor: '#afd8f2', justifyContent: 'flex-start', textAlign: 'left', marginTop: 20}}>
         <Text style={{fontSize: 24, paddingBottom: 20}}>{`Search results for registration code: ${reg}`}</Text>
         <Text style={styles.listText}>{`Type:                          ${type}`}</Text>
         <Text style={styles.listText}>{`Airline:                       ${airline}`}</Text>
