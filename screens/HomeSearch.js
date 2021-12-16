@@ -7,15 +7,6 @@ export default function Home(props) {
   const [text, setText] = useState('');
   const [aircraftData, setAircraftData] = useState([]);
   
-  const [reg, setReg] = useState('');
-  const [seating, setSeating] = useState('');
-  const [age, setAge] = useState('');
-  const [airline, setAirline] = useState('');
-  const [type, setType] = useState('');
-  const [isActive, setIsActive] = useState(false);
-  const [engine, setEngine] = useState('');
-  const [isFreighter, setIsFreighter] = useState(false);
-
   const [history, setHistory] = useState([]);
 
 
@@ -30,14 +21,6 @@ export default function Home(props) {
     .then(response => response.json())
     .then(responseJson => {
       setAircraftData(responseJson);
-      setReg(responseJson.reg);
-      setSeating(responseJson.numSeats);
-      setAge(responseJson.ageYears);
-      setAirline(responseJson.airlineName);
-      setType(responseJson.typeName);
-      setEngine(responseJson.engineType);
-      setIsActive(responseJson.active);
-      setIsFreighter(responseJson.isFreighter);
       
       setHistory([...history, responseJson.reg]);
 
@@ -45,7 +28,7 @@ export default function Home(props) {
     .catch(error => {
       Alert.alert('Error', error.message);
     });
-    console.log(aircraftData.numSeats)
+    console.log(aircraftData)
     console.log(history)
   };
  
@@ -73,15 +56,15 @@ export default function Home(props) {
       </View>
 
       <View style={{flex: 4, backgroundColor: '#afd8f2', justifyContent: 'flex-start', textAlign: 'left', marginTop: 20}}>
-        <Text style={{fontSize: 24, paddingBottom: 20}}>{`Search results for registration code: ${reg}`}</Text>
-        <Text style={styles.listText}>{`Type:                          ${type}`}</Text>
-        <Text style={styles.listText}>{`Airline:                       ${airline}`}</Text>
-        <Text style={styles.listText}>{`Age (years):              ${age}`}</Text>
-        <Text style={styles.listText}>{`In service:                 ${isActive}`}</Text>
-        <Text style={styles.listText}>{`Freightplane:           ${isFreighter}`}</Text>
-        <Text style={styles.listText}>{`Number of seats:    ${seating}`}</Text>
-        <Text style={styles.listText}>{`Engine type:            ${engine}`}</Text>
-        
+        <Text style={{fontSize: 24, paddingBottom: 20}}>{`Search results for registration code: ${aircraftData.reg}`}</Text>
+        <Text style={styles.listText}>{`Type:                          ${aircraftData.typeName}`}</Text>
+        <Text style={styles.listText}>{`Airline:                       ${aircraftData.airlineName}`}</Text>
+        <Text style={styles.listText}>{`Age (years):              ${aircraftData.ageYears}`}</Text>
+        <Text style={styles.listText}>{`In service:                 ${aircraftData.active}`}</Text>
+        <Text style={styles.listText}>{`Freightplane:           ${aircraftData.isFreighter}`}</Text>
+        <Text style={styles.listText}>{`Number of seats:    ${aircraftData.numSeats}`}</Text>
+        <Text style={styles.listText}>{`Engine type:             ${aircraftData.engineType}`}</Text>
+
       </View>
     </View>
     

@@ -8,6 +8,7 @@ export default function History({ route }) {
     };
 
     const { history } = route.params;
+    console.log(history)
     
 
     return(
@@ -17,7 +18,7 @@ export default function History({ route }) {
                 data={history}
                 keyExtractor={(item, index) => index.toString()}
                 renderItem={({ item }) => 
-                <Text style={{fontSize: 18}}>{item.key}</Text>}/>
+                <Text style={{fontSize: 18}}>{item.value}</Text>}/>
         </View>
     );
 }
